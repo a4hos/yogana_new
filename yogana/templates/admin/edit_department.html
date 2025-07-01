@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content_wrapper %}
+
+  <h1>Edit Service</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="slug">Service Slug</label>
+      <input type="text" class="form-control" id="slug" name="slug" value="{{ service.slug }}" required>
+    </div>
+    <div class="form-group">
+      <label for="name">Service Name</label>
+      <input type="text" class="form-control" id="name" name="name" value="{{ service.name }}" required>
+    </div>
+    <div class="form-group">
+      <label for="icon">Service Icon</label>
+      <input type="text" class="form-control" id="icon" name="icon" value="{{ service.icon }}" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Service Description</label>
+      <textarea class="form-control" id="description" name="description" required>{{ service.description }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="paragraph1">Paragraph 1</label>
+      <textarea class="form-control" id="paragraph1" name="paragraph1" required>{{ service.paragraph1 }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="paragraph2">Paragraph 2</label>
+      <textarea class="form-control" id="paragraph2" name="paragraph2" required>{{ service.paragraph2 }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="paragraph3">Paragraph 3</label>
+      <textarea class="form-control" id="paragraph3" name="paragraph3" required>{{ service.paragraph3 }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="image">Service Image</label>
+      <input type="file" class="form-control" id="image" name="image">
+      <small>Current Image: {{ service.image }}</small>
+    </div>
+    <div class="form-group">
+      <label for="icon_class">Icon Class</label>
+      <input type="text" class="form-control" id="icon_class" name="icon_class" value="{{ service.icon_class }}" required>
+    </div>
+    <div class="form-group">
+      <label for="details">Service Details</label>
+      <textarea class="form-control" id="details" name="details" required>{{ service.details }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Service</button>
+  </form>
+{% endblock %}
+

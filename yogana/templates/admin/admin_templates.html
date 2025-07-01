@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content_wrapper %}
+<div class="container mt-4">
+    <h1>Admin: Templates</h1>
+    <form method="POST" action="{{ url_for('admin_templates') }}">
+        <div class="form-group mb-3">
+            <label for="file_name" class="form-label">Choose a template to edit:</label>
+            <select class="form-select" name="file_name" id="file_name" required>
+                <option value="" disabled selected>Select a file</option>
+                {% for file in html_files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Edit File</button>
+    </form>
+</div>
+{% endblock %}

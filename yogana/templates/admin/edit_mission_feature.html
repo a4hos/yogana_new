@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Edit Mission Feature{% endblock %}
+{% block content_wrapper %}
+<div class="container my-4">
+    <h2 class="text-primary">Edit Mission Feature</h2>
+    <form method="POST" class="mt-4">
+        <div class="form-group mb-3">
+            <label for="icon" class="form-label">Icon</label>
+            <input type="text" class="form-control" id="icon" name="icon" value="{{ mission_feature.icon }}" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ mission_feature.title }}" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="5" required>{{ mission_feature.description }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Update Mission Feature</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Add New FAQ
+{% endblock %}
+
+{% block content_wrapper %}
+  <h1>Manage VisionData</h1>
+
+  <!-- Form to add a new VisionData -->
+  <h3>Add New VisionData</h3>
+  <form method="POST">
+    <div class="form-group">
+      <label for="icon_class">Icon Class</label>
+      <input type="text" class="form-control" id="icon_class" name="icon_class" required>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" name="description" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add VisionData</button>
+  </form>
+
+  <hr>
+
+  <!-- List of existing VisionData -->
+  <h3>Existing VisionData</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Icon Class</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vision in visiondata %}
+        <tr>
+          <td>{{ vision.icon_class }}</td>
+          <td>{{ vision.title }}</td>
+          <td>{{ vision.description }}</td>
+          <td>
+            <a href="{{ url_for('edit_visiondata', id=vision.id) }}" class="btn btn-warning">Edit</a>
+
+            <form action="{{ url_for('delete_visiondata', id=vision.id) }}" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

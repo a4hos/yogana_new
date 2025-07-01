@@ -1,0 +1,161 @@
+{% extends 'www/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content_wrapper %}
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+<!-- Start Period Calculator Section -->
+<div id="period-calculator" class="period-calculator-area de-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2">
+                <div class="site-title text-center">
+                    <h2>{{ title }}</h2>
+                    <p class="mb-0 mt-20">
+                        Estimate your next period and plan ahead!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bmi-info-section">
+            <h3>What is BMI?</h3>
+            <p>
+                BMI, or Body Mass Index, is a simple calculation used to assess an individual's body weight relative to their height. A BMI between 18.5 and 24.9 is considered healthy.
+            </p>
+        </div>
+             
+
+
+
+
+    <!-- BMI Form Container -->
+    <div class="bmi-form-container">
+        <form method="POST" action="{{ url_for('bmi_calculator') }}">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" name="name" class="form-control bmi-form-input" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" name="email" class="form-control bmi-form-input" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Your Weight (kg)</label>
+                <input type="number" name="weight" class="form-control bmi-form-input" id="weight" placeholder="Enter your weight in kg" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Your Height (cm)</label>
+                <input type="number" name="height" class="form-control bmi-form-input" id="height" placeholder="Enter your height in cm" required>
+            </div>
+            <button type="submit" class="btn bmi-btn-primary">Calculate BMI</button>
+        </form>
+    </div>
+
+
+    {% if new_entry_result %}
+        <div class="bmi-result-section p-4 mb-4 rounded">
+            <h4>New BMI Calculation</h4>
+            <p><strong>Name:</strong> {{ new_entry_result.name }}</p>
+            <p><strong>Email:</strong> {{ new_entry_result.email }}</p>
+            <p><strong>Weight:</strong> {{ new_entry_result.weight }} kg</p>
+            <p><strong>Height:</strong> {{ new_entry_result.height }} cm</p>
+            <p><strong>BMI:</strong> {{ new_entry_result.bmi }}</p>
+            <p><strong>Category:</strong> {{ new_entry_result.bmi_category }}</p>
+        </div>
+    {% endif %}
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<style>
+    /* Form Container Styles */
+    .bmi-form-container {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    /* Info Section Styles */
+    .bmi-info-section h3 {
+        color: #2196F3;
+    }
+    .bmi-info-section {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #e7f3fe;
+        border-left: 6px solid #2196F3;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+
+    /* Form Input Styles */
+    .bmi-form-input {
+        border: 1px solid #dfe3e8;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+        width: 100%;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .bmi-form-input:focus {
+        border-color: #4c9eff;
+        box-shadow: 0 0 8px rgba(76, 158, 255, 0.3);
+        outline: none;
+    }
+
+    /* Button Styles */
+    .bmi-btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .bmi-btn-primary:hover {
+        background-color: #3b8edc;
+    }
+
+    /* Result Section Styles */
+    .bmi-result-section {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f0f8ff;
+        border: 1px solid #2196F3;
+        border-radius: 5px;
+    }
+
+</style>
+
+{% endblock %}

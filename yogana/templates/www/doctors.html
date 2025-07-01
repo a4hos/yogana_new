@@ -1,0 +1,51 @@
+<!-- Doctors.html -->
+{% extends 'www/base.html' %}
+
+
+{% block content_wrapper %}
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+    <!-- Start Doctor Area -->
+    <section class="doctor-area ptb-100">
+        <div class="container">
+            <div class="section-title">
+                <span>Our Doctors</span>
+                <h2>Meet our qualified healthcare professionals</h2>
+                <p>We, at Yogana strive to deliver comprehensive medical services through our partnership with highly qualified healthcare professionals in our state-of-the-art facility.</p>
+            </div>
+
+            <div class="row">
+                {% for doctor in doctors %}
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-doctor-box">
+                        <div class="doctor-image">
+                            <img src="{{ url_for('static', filename=doctor.image) }}" alt="image">
+                            <a href="{{ url_for('doctor_details', slug=doctor.slug) }}" class="details-btn"><i class="fas fa-plus"></i></a>
+                        </div>
+
+                        <div class="doctor-content">
+                            <h3><a href="{{ url_for('doctor_details', slug=doctor.slug) }}">{{ doctor.name }}</a></h3>
+                            <span>{{ doctor.specialty }}</span>
+
+                            <ul class="social">
+                                <li><a href="{{ doctor.social_facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="{{ doctor.social_twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="{{ doctor.social_linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="{{ doctor.social_instagram }}"><i class="fab fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="shape3"><img src="site/img/shape/3.png" class="wow fadeInLeft" alt="image"></div>
+    </section>
+    <!-- End Doctor Area -->
+    
+
+
+{% endblock %}

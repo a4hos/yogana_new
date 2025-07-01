@@ -1,0 +1,64 @@
+<!-- departments.html -->
+{% extends 'www/base.html' %}
+
+
+{% block content_wrapper %}
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+
+    <section class="services-details-area ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="services-details-desc">
+                        <div class="services-details-image">
+                            <img src="{{ url_for('static', filename=service.image) }}" alt="image">
+                        </div>
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.description }}</p>
+                        <p>{{ service.paragraph1 }}</p>
+                        <p>{{ service.paragraph2 }}</p>
+                        <p>{{ service.paragraph3 }}</p>
+    
+                        <div class="services-details-features">
+                            <div class="row">
+                                {% set details_list = service.details.split(';;') %}
+                                {% for detail in details_list %}
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <ul class="services-features-list">
+                                        <li><i class="flaticon-check-mark"></i> {{ detail.strip() }}</li>
+                                    </ul>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <aside class="widget-area" id="secondary">
+                        <section class="widget widget_services_list">
+                            <h3 class="widget-title">More Services</h3>
+                            <ul>
+                                {% for other_service in services %}
+                                <li>
+                                    <a href="{{ url_for('departments_details', slug=other_service.slug) }}">
+                                        {{ other_service.name }} <i class="flaticon-arrow-pointing-to-right"></i>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Start Appointment Area -->
+    {% include 'www/components/appointment-part.html' %}
+    <!-- End Appointment Area -->
+
+{% endblock %}

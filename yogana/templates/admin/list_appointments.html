@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content_wrapper %}
+<div class="container my-4">
+    <h1 class="text-primary mb-4">Appointments</h1>
+
+    <!-- Appointments Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Service</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if appointments %}
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ appointment.name }}</td>
+                        <td>{{ appointment.email }}</td>
+                        <td>{{ appointment.services }}</td>
+                        <td>{{ appointment.phone }}</td>
+                        <td>{{ appointment.created_at.strftime('%Y-%m-%d %H:%M') if appointment.created_at else 'N/A' }}</td>
+                        <td class="text-center">
+                            <form method="POST" action="{{ url_for('delete_appointment', id=appointment.id) }}" style="display: inline-block;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">No appointments available.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

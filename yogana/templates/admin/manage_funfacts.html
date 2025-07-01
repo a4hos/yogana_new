@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Add New FAQ
+{% endblock %}
+
+{% block content_wrapper %}
+  <h1>Manage FunFacts</h1>
+
+  <!-- Form to add a new FunFact -->
+  <h3>Add New FunFact</h3>
+  <form method="POST">
+    <div class="form-group">
+      <label for="icon">Icon</label>
+      <input type="text" class="form-control" id="icon" name="icon" required>
+    </div>
+    <div class="form-group">
+      <label for="count">Count</label>
+      <input type="number" class="form-control" id="count" name="count" required>
+    </div>
+    <div class="form-group">
+      <label for="optional_icon">Optional Icon</label>
+      <input type="text" class="form-control" id="optional_icon" name="optional_icon" required>
+    </div>
+    <div class="form-group">
+      <label for="text">Text</label>
+      <input type="text" class="form-control" id="text" name="text" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add FunFact</button>
+  </form>
+
+  <hr>
+
+  <!-- List of existing FunFacts -->
+  <h3>Existing FunFacts</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Icon</th>
+        <th>Count</th>
+        <th>Optional Icon</th>
+        <th>Text</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for funfact in funfacts %}
+        <tr>
+          <td>{{ funfact.icon }}</td>
+          <td>{{ funfact.count }}</td>
+          <td>{{ funfact.optional_icon }}</td>
+          <td>{{ funfact.text }}</td>
+          <td>
+            <a href="{{ url_for('edit_funfact', id=funfact.id) }}" class="btn btn-warning">Edit</a>
+
+            <form action="{{ url_for('delete_funfact', id=funfact.id) }}" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

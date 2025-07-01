@@ -1,0 +1,24 @@
+
+<!-- Start Fun Facts Area -->
+<section class="fun-facts-area ptb-100">
+    <div class="container">
+        <div class="row">
+            {% for fact in fun_facts %}
+                <div class="col-lg-3 col-md-3 col-sm-3 col-6">
+                    <div class="single-fun-facts">
+                        <div class="icon">
+                            <i class="{{ fact.icon }}"></i>
+                        </div>
+                        <h3>
+                            <span class="odometer" data-count="{{ fact.count }}"></span>
+                            <span class="optional-icon">{{ fact.optional_icon }}</span>
+                        </h3>
+                        <p>{{ fact.text }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- End Fun Facts Area -->
+

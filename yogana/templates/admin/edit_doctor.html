@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content_wrapper %}
+<div class="container my-4">
+    <h2 class="text-primary">{{ 'Update Doctor' if doctor else 'Add New Doctor' }}</h2>
+    <form method="post" class="mt-4" enctype="multipart/form-data">
+        <!-- Name -->
+        <div class="form-group mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter doctor's name" value="{{ doctor.name if doctor else '' }}" required>
+        </div>
+
+        <!-- Slug -->
+        <div class="form-group mb-3">
+            <label for="slug" class="form-label">Slug</label>
+            <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter unique slug" value="{{ doctor.slug if doctor else '' }}" required>
+        </div>
+
+        <!-- Specialty -->
+        <div class="form-group mb-3">
+            <label for="specialty" class="form-label">Specialty</label>
+            <input type="text" class="form-control" id="specialty" name="specialty" placeholder="Enter doctor's specialty" value="{{ doctor.specialty if doctor else '' }}" required>
+        </div>
+
+        <!-- Image URL -->
+        <div class="form-group mb-3">
+            <label for="image" class="form-label">Image URL</label>
+            <input type="file" class="form-control" id="image" name="image" placeholder="Enter image URL" value="{{ doctor.image if doctor else '' }}" required>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Provide a detailed description" required>{{ doctor.description if doctor else '' }}</textarea>
+        </div>
+
+        <!-- Skills -->
+        <div class="form-group mb-3">
+            <label for="skills" class="form-label">Skills (comma-separated)</label>
+            <input type="text" class="form-control" id="skills" name="skills" placeholder="e.g., Surgery, Pediatrics" value="{{ doctor.skills if doctor else '' }}" required>
+        </div>
+
+        <!-- Education -->
+        <div class="form-group mb-3">
+            <label for="education" class="form-label">Education (JSON)</label>
+            <textarea class="form-control" id="education" name="education" rows="4" placeholder='e.g., [{"degree": "MBBS", "institution": "Harvard Medical School", "year": 2005}]' required>{{ doctor.education if doctor else '' }}</textarea>
+        </div>
+
+        <!-- Social Media Links -->
+        <h4 class="text-secondary mt-4">Social Media Links</h4>
+        <div class="form-group mb-3">
+            <label for="social_facebook" class="form-label">Facebook</label>
+            <input type="text" class="form-control" id="social_facebook" name="social_facebook" placeholder="Enter Facebook profile URL" value="{{ doctor.social_facebook if doctor else '' }}">
+        </div>
+        <div class="form-group mb-3">
+            <label for="social_twitter" class="form-label">Twitter</label>
+            <input type="text" class="form-control" id="social_twitter" name="social_twitter" placeholder="Enter Twitter profile URL" value="{{ doctor.social_twitter if doctor else '' }}">
+        </div>
+        <div class="form-group mb-3">
+            <label for="social_linkedin" class="form-label">LinkedIn</label>
+            <input type="text" class="form-control" id="social_linkedin" name="social_linkedin" placeholder="Enter LinkedIn profile URL" value="{{ doctor.social_linkedin if doctor else '' }}">
+        </div>
+        <div class="form-group mb-3">
+            <label for="social_instagram" class="form-label">Instagram</label>
+            <input type="text" class="form-control" id="social_instagram" name="social_instagram" placeholder="Enter Instagram profile URL" value="{{ doctor.social_instagram if doctor else '' }}">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-success w-100">{{ 'Update' if doctor else 'Add' }} Doctor</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

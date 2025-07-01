@@ -1,0 +1,16 @@
+<section class="widget widget_fovia_posts_thumb">
+    <h3 class="widget-title">Latest Posts</h3>
+
+    {% for blog in latest_blogs %}
+    <article class="item">
+        <a href="{{ url_for('blog_details', slug=blog['slug']) }}" class="thumb">
+            <span class="fullimage cover" style="background-image: url('{{ blog['image'] }}');" role="img"></span>
+        </a>
+        <div class="info">
+            <time datetime="{{ blog['published_on'] }}">{{ blog['published_on'] }}</time>
+            <h4 class="title usmall"><a href="{{ url_for('blog_details', slug=blog['slug']) }}">{{ blog['title'] }}</a></h4>
+        </div>
+        <div class="clear"></div>
+    </article>
+    {% endfor %}
+</section>

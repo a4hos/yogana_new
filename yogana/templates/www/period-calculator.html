@@ -1,0 +1,172 @@
+{% extends 'www/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content_wrapper %}
+
+<!-- Start Breadcrumb -->
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+<!-- Start Period Calculator Section -->
+<div id="period-calculator" class="period-calculator-area de-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2">
+                <div class="site-title text-center">
+                    <h2>Period Calculator</h2>
+                    <p class="mb-0 mt-20">
+                        Estimate your next period and plan ahead!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="period-info-section">
+            <h3>What is the Period Calculator?</h3>
+            <p>
+                This Period Calculator helps predict your next period date based on your last period's start date. Enter a few details to get an estimate and track your menstrual cycle for better health planning.
+            </p>
+        </div>
+
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Period Calculator Form -->
+        <div class="period-form-container">
+            <form method="POST" action="{{ url_for('period_calculator') }}">
+                <div class="period-form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" name="name" class="period-form-control" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="period-form-group">
+                    <label for="number">Your Number</label>
+                    <input type="number" name="number" class="period-form-control" id="number" placeholder="Enter your number" required>
+                </div>
+                <div class="period-form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" name="email" class="period-form-control" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="period-form-group">
+                    <label for="date">Last Period Date</label>
+                    <input type="date" name="date" class="period-form-control" id="date" required>
+                </div>                
+                <div class="period-form-group">
+                    <label for="date">Cycle Length</label>
+                    <input type="number" name="clength" class="period-form-control" id="number" placeholder="Enter your cycle length" required>
+                </div>
+                <button type="submit" class="period-btn-primary">Calculate</button>
+            </form>
+        </div>
+
+        <!-- Display Results -->
+        {% if new_entry_result %}
+            <div class="result-section">
+                <h3>Your Period Calculation Result</h3>
+                <p><strong>Name:</strong> {{ new_entry_result.name }}</p>
+                <p><strong>Number:</strong> {{ new_entry_result.number }}</p>
+                <p><strong>Email:</strong> {{ new_entry_result.email }}</p>
+                <p><strong>Last Period Date:</strong> {{ new_entry_result.last_period_date }}</p>
+                <p><strong>Estimated Next Period Date:</strong> {{ new_entry_result.next_period_date }}</p>
+            </div>
+        {% elif previous_entry %}
+            <div class="result-section">
+                <h3>Previous Entry</h3>
+                <p><strong>Name:</strong> {{ previous_entry.name }}</p>
+                <p><strong>Number:</strong> {{ previous_entry.number }}</p>
+                <p><strong>Email:</strong> {{ previous_entry.email }}</p>
+                <p><strong>Last Period Date:</strong> {{ previous_entry.last_period_date }}</p>
+                <p><strong>Estimated Next Period Date:</strong> {{ previous_entry.next_period_date }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<!-- End Period Calculator Section -->
+
+<style>
+    /* Unique Styles for Period Calculator */
+    .period-info-section {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #e7f3fe;
+        border-left: 6px solid #2196F3;
+        border-radius: 5px;
+    }
+
+    .period-info-section h3 {
+        color: #2196F3;
+    }
+
+    .flash-messages .alert {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .period-form-container {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .period-form-group {
+        margin-bottom: 15px;
+    }
+
+    .period-form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .period-form-control {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .period-form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+
+    .period-btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .period-btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .result-section {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f0f8ff;
+        border: 1px solid #2196F3;
+        border-radius: 5px;
+    }
+</style>
+
+{% endblock %}

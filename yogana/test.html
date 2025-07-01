@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html >
+<head>
+	
+	<script>dojoConfig = {parseOnLoad: true}</script>
+	<script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+	
+	<script>
+require(["dojo/parser", "dijit/Editor"]);
+	</script>
+</head>
+<body >
+    <div data-dojo-type="dijit/Editor" id="editor1" data-dojo-props="onChange:function(){console.log('editor1 onChange handler: ' + arguments[0])}">
+    <p>This instance is created from a div directly with default toolbar and plugins</p>
+</div>
+</body>
+</html>

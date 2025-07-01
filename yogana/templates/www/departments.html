@@ -1,0 +1,32 @@
+<!-- departments.html -->
+{% extends 'www/base.html' %}
+
+
+{% block content_wrapper %}
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+    <!-- Start Services Area -->
+    <section class="services-area ptb-100 bg-f4f9fd">
+        <div class="container">
+            <div class="row">
+                {% for service in services %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services-box {{ service.bg_class }}">
+                        <div class="icon">
+                            <i class="{{ service.icon_class }}"></i>
+                        </div>
+                        <h3><a href="/departments/{{ service.slug }}">{{ service.name }}</a></h3>
+                        <p>{{ service.description }}</p>
+                        <a href="/departments/{{ service.slug }}" class="read-more-btn">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- End Services Area -->
+
+
+{% endblock %}

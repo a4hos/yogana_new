@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Add New FAQ
+{% endblock %}
+
+{% block content_wrapper %}
+  <h1>Edit VisionData</h1>
+  <form method="POST">
+    <div class="form-group">
+      <label for="icon_class">Icon Class</label>
+      <input type="text" class="form-control" id="icon_class" name="icon_class" value="{{ vision.icon_class }}" required>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title" value="{{ vision.title }}" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" name="description" value="{{ vision.description }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update VisionData</button>
+  </form>
+{% endblock %}

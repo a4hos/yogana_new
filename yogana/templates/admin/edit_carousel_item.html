@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Add New FAQ
+{% endblock %}
+
+{% block content_wrapper %}
+  <h1>Edit Carousel Item</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="image_url">Image URL</label>
+      <input type="file" class="form-control" id="image_url" name="image_url" value="{{ carousel_item.image_url }}" required>
+    </div>
+    <div class="form-group">
+      <label for="bg_class">Background Class</label>
+      <input type="text" class="form-control" id="bg_class" name="bg_class" value="{{ carousel_item.bg_class }}" required>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title" value="{{ carousel_item.title }}" required>
+    </div>
+    <div class="form-group">
+      <label for="headline">Headline</label>
+      <input type="text" class="form-control" id="headline" name="headline" value="{{ carousel_item.headline }}" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" name="description" required>{{ carousel_item.description }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="btn_primary_text">Primary Button Text</label>
+      <input type="text" class="form-control" id="btn_primary_text" name="btn_primary_text" value="{{ carousel_item.btn_primary_text }}" required>
+    </div>
+    <div class="form-group">
+      <label for="btn_primary_icon">Primary Button Icon</label>
+      <input type="text" class="form-control" id="btn_primary_icon" name="btn_primary_icon" value="{{ carousel_item.btn_primary_icon }}" required>
+    </div>
+    <div class="form-group">
+      <label for="btn_primary_link">Primary Button Link</label>
+      <input type="text" class="form-control" id="btn_primary_link" name="btn_primary_link" value="{{ carousel_item.btn_primary_link }}" required>
+    </div>
+    <div class="form-group">
+      <label for="btn_secondary_text">Secondary Button Text</label>
+      <input type="text" class="form-control" id="btn_secondary_text" name="btn_secondary_text" value="{{ carousel_item.btn_secondary_text }}" required>
+    </div>
+    <div class="form-group">
+      <label for="btn_secondary_icon">Secondary Button Icon</label>
+      <input type="text" class="form-control" id="btn_secondary_icon" name="btn_secondary_icon" value="{{ carousel_item.btn_secondary_icon }}" required>
+    </div>
+    <div class="form-group">
+      <label for="btn_secondary_link">Secondary Button Link</label>
+      <input type="text" class="form-control" id="btn_secondary_link" name="btn_secondary_link" value="{{ carousel_item.btn_secondary_link }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Carousel Item</button>
+  </form>
+{% endblock %}

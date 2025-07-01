@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Place ID Finder</title>
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: -33.8688, lng: 151.2195 },
+          zoom: 13,
+        });
+
+        const autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById("pac-input"),
+          { fields: ["place_id", "geometry"] }
+        );
+
+        autocomplete.addListener("place_changed", () => {
+          const place = autocomplete.getPlace();
+
+          if (!place.geometry) return;
+
+          const placeId = place.place_id;
+          document.getElementById("place-id").textContent = placeId;
+          navigator.clipboard.writeText(placeId).then(() => {
+            alert("Place ID copied to clipboard: " + placeId);
+          });
+        });
+      }
+      window.initMap = initMap;
+    </script>
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #pac-input {
+        margin: 10px;
+        padding: 10px;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="pac-input" type="text" placeholder="Enter a location" />
+    <div id="map"></div>
+    <div id="place-id" style="margin: 10px; font-size: 16px;"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFLV9a4dMGKPf_Z6xKEbEx1Spp8S0rk9U&callback=initMap&libraries=places" defer></script>
+  </body>
+</html>

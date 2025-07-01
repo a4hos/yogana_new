@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Mission Features{% endblock %}
+{% block content_wrapper %}
+<div class="container my-4">
+    <h2 class="text-primary">Mission Features</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Icon</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feature in mission_features %}
+            <tr>
+                <td>{{ feature.id }}</td>
+                <td>{{ feature.icon }}</td>
+                <td>{{ feature.title }}</td>
+                <td>{{ feature.description[:50] }}...</td>
+                <td>
+                    <a href="{{ url_for('edit_mission_feature', id=feature.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">No Mission Features available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

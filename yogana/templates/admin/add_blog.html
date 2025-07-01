@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content_wrapper %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="text-white">Add New Blog</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+
+                        <div class="form-group">
+                            {{ form.author.label }}<br>
+                            {{ form.author(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.date.label }}<br>
+                            {{ form.date(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.image.label }}<br>
+                            {{ form.image(class="form-control", type="file", enctype="multipart/form-data") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.title.label }}<br>
+                            {{ form.title(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.excerpt.label }}<br>
+                            {{ form.excerpt(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.slug.label }}<br>
+                            {{ form.slug(class="form-control") }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.content.label }}<br>
+                            <textarea class="ediTML-lib" name="content" style="width: 100%; height: 200px ; max-height: 600px;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            {{ form.features.label }}<br>
+                            {{ form.features(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.gallery_images.label }}<br>
+                            {{ form.gallery_images(class="form-control", type="file") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.tags.label }}<br>
+                            {{ form.tags(class="form-control") }}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.published_on.label }}<br>
+                            {{ form.published_on(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.published_by.label }}<br>
+                            {{ form.published_by(class="form-control") }}
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary mt-3">{{ form.submit.label }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

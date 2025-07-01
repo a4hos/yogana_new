@@ -1,0 +1,43 @@
+<html>
+  <body>
+  <div class="content-wrapper">
+
+    <div class="row">
+        <div class="col-xl-4 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <h4 class="card-title">Market Trends</h4>
+                    <div class="dropdown">
+                        <a href="{{ url_for('login_page') }}">
+                            This week
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                          <h6 class="dropdown-header">This week</h6>
+                          <h6 class="dropdown-header">This month</h6>
+                        </div>
+                      </div>
+                </div>
+                <div id="chart-legends-market-trend" class="chart-legends mt-1">
+                </div>
+                <div class="row mt-2 mb-2">
+                  <div class="col-6">
+                    <div class="text-small"><span class="text-success">18.2%</span> higher </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-small"><span class="text-danger">0.7%</span> higher </div>
+                  </div>
+                </div>
+                <div class="marketTrends mt-4">
+                  <canvas id="marketTrendssatacked"></canvas>
+                </div>
+                  
+              </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+  </body>
+  </html>

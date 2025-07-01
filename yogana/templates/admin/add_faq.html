@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Add New FAQ
+{% endblock %}
+
+{% block content_wrapper %}
+<div class="container my-4">
+   <h2 class="text-primary">Add New FAQ</h2>
+   <form method="POST" class="mt-4">
+      <div class="form-group mb-3">
+         <label for="question" class="form-label">Question</label>
+         <input type="text" class="form-control" id="question" name="question" required>
+      </div>
+
+      <div class="form-group mb-3">
+         <label for="answer" class="form-label">Answer</label>
+         <textarea class="form-control" id="answer" name="answer" rows="5" required></textarea>
+      </div>
+
+      <div class="form-group mb-3">
+         <button type="submit" class="btn btn-success">Add FAQ</button>
+      </div>
+   </form>
+</div>
+{% endblock %}

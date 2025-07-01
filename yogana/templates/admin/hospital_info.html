@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content_wrapper %}
+    <div class="container">
+        <h1>Manage Hospital Info</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="service_hours">Service Hours</label>
+                <input type="text" id="service_hours" name="service_hours" class="form-control" 
+                       value="{{ hospital_info.service_hours if hospital_info else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" class="form-control" 
+                       value="{{ hospital_info.phone if hospital_info else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" 
+                       value="{{ hospital_info.email if hospital_info else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="facebook_url">Facebook URL</label>
+                <input type="url" id="facebook_url" name="facebook_url" class="form-control" 
+                       value="{{ hospital_info.facebook_url if hospital_info else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="twitter_url">Twitter URL</label>
+                <input type="url" id="twitter_url" name="twitter_url" class="form-control" 
+                       value="{{ hospital_info.twitter_url if hospital_info else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="linkedin_url">LinkedIn URL</label>
+                <input type="url" id="linkedin_url" name="linkedin_url" class="form-control" 
+                       value="{{ hospital_info.linkedin_url if hospital_info else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="instagram_url">Instagram URL</label>
+                <input type="url" id="instagram_url" name="instagram_url" class="form-control" 
+                       value="{{ hospital_info.instagram_url if hospital_info else '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    {% endblock %}

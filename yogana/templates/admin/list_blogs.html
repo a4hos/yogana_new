@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content_wrapper %}
+<div class="container my-4">
+   <div class="row align-items-center mb-3">
+      <div class="col-md-6">
+         <h2 class="text-primary">All Blogs</h2>
+      </div>
+      <div class="col-md-6 text-md-end">
+         <a class="btn btn-success btn-sm" href="{{ url_for('add_blog') }}">
+            <i class="fas fa-plus-circle"></i> Add New Blog
+         </a>
+      </div>
+   </div>
+
+   <div class="table-responsive">
+      <table class="table table-hover shadow-sm">
+         <thead class="table-primary">
+            <tr>
+               <th scope="col" class="text-center">ID</th>
+               <th scope="col">Title</th>
+               <th scope="col">Content (Preview)</th>
+               <th scope="col">Created At</th>
+               <th scope="col" class="text-center">Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for blog in blogs.items %}
+            <tr>
+               <td class="text-center align-middle">{{ blog.id }}</td>
+               <td class="align-middle">
+                  <a href="{{ url_for('blog_details', slug=blog.slug) }}" class="text-decoration-none text-dark fw-bold">
+                     {{ blog.title }}
+                  </a>
+               </td>
+               <td class="align-middle">{{ blog.content[:50] }}...</td>
+               <td class="align-middle">{{ blog.created_at.strftime('%Y-%m-%d') }}</td>
+               <td class="text-center align-middle">
+                  <form method="POST" action="{{ url_for('delete_blog', blog_id=blog.id) }}" style="display:inline;">
+                     <button class="btn btn-danger btn-sm" type="submit">
+                        <i class="fas fa-trash-alt"></i> Delete
+                     </button>
+                  </form>
+               </td>
+               <td>
+                    <!-- Edit Link -->
+                    <a href="{{ url_for('edit_blog', blog_id=blog.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+               <td colspan="6" class="text-center text-muted">No blogs available.</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+
+   <!-- Pagination -->
+   <nav aria-label="Page navigation" class="mt-4">
+      <ul class="pagination justify-content-center">
+         {% if blogs.has_prev %}
+         <li class="page-item">
+            <a class="page-link" href="?page=1">&laquo; First</a>
+         </li>
+         <li class="page-item">
+            <a class="page-link" href="?page={{ blogs.prev_num }}">Previous</a>
+         </li>
+         {% endif %}
+
+         <li class="page-item disabled">
+            <span class="page-link">Page {{ blogs.page }} of {{ blogs.pages }}</span>
+         </li>
+
+         {% if blogs.has_next %}
+         <li class="page-item">
+            <a class="page-link" href="?page={{ blogs.next_num }}">Next</a>
+         </li>
+         <li class="page-item">
+            <a class="page-link" href="?page={{ blogs.pages }}">Last &raquo;</a>
+         </li>
+         {% endif %}
+      </ul>
+   </nav>
+</div>
+
+<!-- FontAwesome for Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<!-- Custom Styling -->
+<style>
+   .table {
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      overflow: hidden;
+   }
+   .table-hover tbody tr:hover {
+      background-color: #f8f9fa;
+   }
+   .table-primary {
+      background-color: #e3f2fd;
+   }
+   .btn-success {
+      font-size: 0.9em;
+      font-weight: bold;
+   }
+   .btn-danger {
+      font-size: 0.8em;
+   }
+   .pagination .page-link {
+      color: #007bff;
+   }
+   .pagination .page-link:hover {
+      background-color: #e9ecef;
+   }
+</style>
+{% endblock %}

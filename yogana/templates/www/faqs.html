@@ -1,0 +1,46 @@
+<!-- faqs.html -->
+{% extends 'www/base.html' %}
+
+{% block content_wrapper %}
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+    <!-- Start FAQ Area -->
+    <section class="faq-area ptb-100">
+        <div class="container-fluid p-0">
+            <div class="row m-0">
+                <div class="col-lg-6 col-md-12 p-0">
+                    <div class="faq-image">
+                        <img src="/static/img/faq-img1.jpg" alt="FAQ Image">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 p-0">
+                    <div class="faq-accordion">
+                        <span class="sub-title">Frequently Asked Questions</span>
+                        <h2>Get Every Single Answer Here</h2>
+
+                        <ul class="accordion">
+                            {% for faq in faqs %}
+                            <li class="accordion-item">
+                                <a class="accordion-title" href="javascript:void(0)">
+                                    <i class="fas fa-plus"></i>
+                                    {{ faq.question }}
+                                </a>
+                                <p class="accordion-content">{{ faq.answer }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End FAQ Area -->
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/appointment-part.html' %}
+    <!-- End Appointment Area -->
+{% endblock %}

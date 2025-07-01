@@ -1,0 +1,19 @@
+    <!-- Start Our Vision Area -->
+    <section class="our-vision-area ptb-100 pt-0">
+        <div class="container">
+            <div class="row">
+                {% for item in vision_data %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-vision-box">
+                        <div class="icon">
+                            <i class="{{ item['icon_class'] }}"></i>
+                        </div>
+                        <h3>{{ item['title'] }}</h3>
+                        <p>{{ item['description'] }}</p>
+                    </div>x
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- End Our Vision Area -->

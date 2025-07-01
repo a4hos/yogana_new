@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content_wrapper %}
+<div class="row" style="margin-top:20px; margin-left:20px">
+   <div class="col-8">
+       <h2>All Blogs</h2>
+       <a class="btn btn-link" href="{{ url_for('add_blog') }}">Add New Blog</a>
+   </div>
+
+   <table class="table table-hover" style="margin-top: 20px; border: 2px solid #fac7f2;">
+      <thead>
+         <tr style="border: 2px solid #fac7f2;">
+            <th scope="col" style="font-size: 1.4em; font-weight: bold; border: 2px solid #fac7f2;">ID</th>
+            <th scope="col" style="font-size: 1.4em; font-weight: bold; border: 2px solid #fac7f2;">Title</th>
+            <th scope="col" style="font-size: 1.4em; font-weight: bold; border: 2px solid #fac7f2;">Content (Preview)</th>
+            <th scope="col" style="font-size: 1.4em; font-weight: bold; border: 2px solid #fac7f2;">Created At</th>
+            <th scope="col" style="font-size: 1.4em; font-weight: bold; border: 2px solid #fac7f2;">Actions</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for blog in blogs.items %}
+         <tr >
+            <td style="border: 1px solid #fdd8f7;">{{ blog.id }}</td>
+            <td style="border: 1px solid #fdd8f7;">
+               <a href="{{ url_for('blog_details', slug=blog.slug) }}">{{ blog.title }}</a>
+            </td>
+            <td style="border: 1px solid #fdd8f7;">{{ blog.content[:50] }}...</td>
+            <td style="border: 1px solid #fdd8f7;">{{ blog.created_at }}</td>
+            <td style="border: 1px solid #fdd8f7;">
+               <form method="POST" action="{{ url_for('delete_blog', blog_id=blog.id) }}" style="display:inline;">
+                  <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+               </form>
+            </td>
+         </tr>
+         {% else %}
+         <tr style="border: 1px solid #0b0b0b;">
+            <td colspan="5" class="text-center">No blogs available.</td>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+   
+   <!-- Pagination and other content -->
+   <div class="pagination">
+      <ul class="pagination">
+         {% if blogs.has_prev %}
+            <li class="page-item">
+               <a class="page-link" href="?page=1">&laquo; first</a>
+            </li>
+            <li class="page-item">
+               <a class="page-link" href="?page={{ blogs.prev_num }}">previous</a>
+            </li>
+         {% endif %}
+
+         <li class="page-item disabled">
+            <span class="page-link">Page {{ blogs.page }} of {{ blogs.pages }}.</span>
+         </li>
+
+         {% if blogs.has_next %}
+            <li class="page-item">
+               <a class="page-link" href="?page={{ blogs.next_num }}">next</a>
+            </li>
+            <li class="page-item">
+               <a class="page-link" href="?page={{ blogs.pages }}">last &raquo;</a>
+            </li>
+         {% endif %}
+      </ul>
+   </div>
+</div>
+{% endblock %}

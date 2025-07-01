@@ -1,0 +1,20 @@
+<!-- blogs.html -->
+{% extends 'www/base.html' %}
+
+{% block content_wrapper %}
+    <h2>Search Results for: "{{ query }}"</h2>
+    
+    {% if results %}
+        <ul>
+            {% for blog in results %}
+                <li>
+                    <a href="{{ url_for('blog_detail', slug=blog['slug']) }}">
+                        {{ blog['title'] }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+{% endblock %}

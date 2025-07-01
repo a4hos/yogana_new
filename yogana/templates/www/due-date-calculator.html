@@ -1,0 +1,168 @@
+<!-- manage_Campaign.html -->
+{% extends 'www/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content_wrapper %}
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+<!-- Start Due Date Calculator Section -->
+<div id="due-calculator" class="due-calculator-area de-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2">
+                <div class="site-title text-center">
+                    <h2>Due Date Calculator</h2>
+                    <p class="mb-0 mt-20">
+                        Estimate your due date and plan ahead!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="due-info-section">
+            <h3>What is the Due Date Calculator?</h3>
+            <p>
+                This Due Date Calculator predicts your estimated delivery date based on your last menstrual period or conception date. Enter your details below to calculate your due date.
+            </p>
+        </div>
+
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Due Date Calculator Form -->
+        <div class="due-form-container">
+            <form method="POST" action="{{ url_for('due_date_calculator') }}">
+                <div class="due-form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" name="name" class="due-form-control" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="due-form-group">
+                    <label for="number">Your number</label>
+                    <input type="number" name="number" class="due-form-control" id="number" placeholder="Enter your number" required>
+                </div>
+                <div class="due-form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" name="email" class="due-form-control" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="due-form-group">
+                    <label for="last_period_date">Last Period Date</label>
+                    <input type="date" name="last_period_date" class="due-form-control" id="last_period_date" required>
+                </div>
+                <button type="submit" class="due-btn-primary">Calculate</button>
+            </form>
+        </div>
+
+        <!-- Display Results -->
+        {% if new_entry_result %}
+            <div class="result-section">
+                <h3>Your Due Date Calculation Result</h3>
+                <p><strong>Name:</strong> {{ new_entry_result.name }}</p>
+                <p><strong>Email:</strong> {{ new_entry_result.email }}</p>
+                <p><strong>Number:</strong> {{ new_entry_result.number }}</p>
+                <p><strong>Last Period Date:</strong> {{ new_entry_result.last_period_date }}</p>
+                <p><strong>Estimated Due Date:</strong> {{ new_entry_result.estimated_due_date }}</p>
+            </div>
+        {% elif previous_entry %}
+            <div class="result-section">
+                <h3>Previous Entry</h3>
+                <p><strong>Name:</strong> {{ previous_entry.name }}</p>
+                <p><strong>Email:</strong> {{ previous_entry.email }}</p>
+                <p><strong>Number:</strong> {{ previous_entry.number }}</p>
+                <p><strong>Last Period Date:</strong> {{ previous_entry.last_period_date }}</p>
+                <p><strong>Estimated Due Date:</strong> {{ previous_entry.estimated_due_date }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<!-- End Due Date Calculator Section -->
+
+<style>
+    /* Styles for Due Date Calculator */
+    .due-info-section {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #e7f3fe;
+        border-left: 6px solid #2196F3;
+        border-radius: 5px;
+    }
+
+    .due-info-section h3 {
+        color: #2196F3;
+    }
+
+    .flash-messages .alert {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .due-form-container {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .due-form-group {
+        margin-bottom: 15px;
+    }
+
+    .due-form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .due-form-control {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .due-form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+
+    .due-btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .due-btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .result-section {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f0f8ff;
+        border: 1px solid #2196F3;
+        border-radius: 5px;
+    }
+</style>
+
+{% endblock %}

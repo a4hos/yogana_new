@@ -1,0 +1,42 @@
+    <!-- Start Our Mission Area -->
+    <section class="our-mission-area ptb-100 pt-0">
+        <div class="container-fluid p-0">
+            {% for ms in mission_section %}
+            <div class="row m-0">
+                
+                <div class="col-lg-6 col-md-12 p-0">
+                    <div class="our-mission-content">
+                        <span class="sub-title">{{ ms['subtitle'] }}</span>
+                        <h2>{{ ms['title'] }}</h2>
+                        <p>{{ ms['description'] }}</p>
+
+                        <ul>
+                            {% for feature in mission_feature %}
+                            <li>
+                                <div class="icon">
+                                    <i class="{{ feature['icon'] }}"></i>
+                                </div>
+                                <span>{{ feature['title'] }}</span>
+                                {{ feature['description'] }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 p-0">
+                    <div class="our-mission-ikmage">
+                        
+                            <img src="{{ url_for('static', filename=ms.image) }}" alt="2image">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shape3">
+            <img src="{{ url_for('static', filename= ms['shape_image']) }}" class="wow fadeInLeft" alt="3image">
+        </div>
+        {% endfor %}
+    </section>
+    <!-- End Our Mission Area -->

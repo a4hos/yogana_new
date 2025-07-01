@@ -1,0 +1,103 @@
+<!-- Doctors details.html -->
+{% extends 'www/base.html' %}
+
+
+{% block content_wrapper %}
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+    <!-- Start Doctor Details Area -->
+    <section class="doctor-details-area ptb-100">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-12">
+                    <div class="doctor-details-image">
+                        <img src="{{ url_for('static', filename=doctor.image) }}" alt="image">
+
+                        <h3>{{ doctor.name }}</h3>
+                        <span>{{ doctor.specialty }}</span>
+
+                        <ul class="social">
+                            <li><a href="{{ doctor.social_facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="{{ doctor.social_twitter }}"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="{{ doctor.social_linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href="{{ doctor.social_instagram }}"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 col-md-12">
+                    <div class="doctor-details-desc">
+                        <h2>Hello I’m {{ doctor.name }} , {{ doctor.specialty }}, let me Introduce Myself.</h2>
+
+                        <p>{{ doctor.description }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-education-desc">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="skill-desc">
+                            <span class="sub-title">My Skills</span>
+                            <ul>
+                                {% if ',' in doctor.skills %}
+                                    {% set skills_list = doctor.skills.split(',') %}
+                                    {% for skill in skills_list %}
+                                        <li><span><i class="flaticon-check-mark"></i> {{ skill.strip() }}</span></li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li><span><i class="flaticon-check-mark"></i> {{ doctor.skills }}</span></li>
+                                {% endif %}
+                            </ul>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <div class="education-desc">
+                            <span class="sub-title">My Education</span>
+
+                            
+                            {% if ';;' in doctor.education %}
+                            {% set education_list = doctor.education.split(';;') %}
+                            <ul>
+                                {% for edu in education_list %}
+                                    {% set edu_parts = edu.split('|') %}
+                                    <li>
+                                        <div class="icon">
+                                            <i class="{{ edu_parts[3].strip() }}"></i>
+                                        </div>
+                                        <span>{{ edu_parts[0].strip() }}</span>
+                                        {{ edu_parts[1].strip() }} ({{ edu_parts[2].strip() }})
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <ul>
+                                <li>{{ doctor.education }}</li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="{{ edu_parts[3].strip() }}"></i>
+                                    </div>
+                                    <span>{{ edu_parts[0].strip() }}</span>
+                                    {{ edu_parts[1].strip() }} ({{ edu_parts[2].strip() }})
+                                </li>
+                            </ul>
+                        {% endif %}
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shape3"><img src="/yogana/static/img/shape/3.png" class="wow fadeInLeft" alt="image"></div>
+    </section>
+    <!-- End Doctor Details Area -->
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/appointment-part.html' %}
+    <!-- End Appointment Area -->
+{% endblock %}

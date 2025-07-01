@@ -1,0 +1,24 @@
+    <!-- Start Feedback Area --> 
+    <section class="page-title-area {{ pdata.bg_class }}" style = "background-image: url('{{ url_for('static', filename=pdata.bg_image) }}');">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container"> 
+                    <div class="page-title-content">
+                        <h2>{{ pdata.title }}</h2>
+                        <ul>
+                            {% for breadcrumb in pdata.breadcrumbs %}
+                                <li>
+                                    {% if breadcrumb.url %}
+                                        <a href="{{ breadcrumb.url }}">{{ breadcrumb.text }}</a>
+                                    {% else %}
+                                        {{ breadcrumb.text }}
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Feedback Area -->

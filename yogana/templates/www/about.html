@@ -1,0 +1,66 @@
+<!-- about.html -->
+{% extends 'www/base.html' %}
+
+{% block content_wrapper %}
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+    <!-- Start About Area -->
+    <section class="about-area ptb-100">
+        <div class="container-fluid p-0">
+            <div class="row m-0">
+                {% for abt in about_section %}
+                <div class="col-lg-6 col-md-12 p-0">
+                    <div class="about-image">
+                        <img src="{{ url_for('static', filename= abt.image) }}" alt="imagse">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 p-0">
+                    <div class="about-content">
+                        
+                            <span>About Us</span>
+                            <h2>{{ abt.title }}</h2>
+                            <p>{{ abt['description'] }}</p>
+
+                            <ul>
+                                {% if ';;' in abt['features'] %}
+                                    {% set content = abt['features'].split(';;') %}
+                                    {% for part in content %}
+                                        <li><i class="flaticon-check-mark"></i> {{ part.strip() }}</li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li><i class="flaticon-check-mark"></i> {{ abt['features'] }}</li>
+                                {% endif %}
+                            </ul> 
+                        
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- End About Area -->
+
+    <!-- Start Our Mission Area -->
+    {% include 'www/components/mission.html' %}
+    <!-- End Our Mission Area -->
+
+    <!-- Start Our Vision Area -->
+    {% include 'www/components/vision.html' %}
+    <!-- End Our Vision Area -->
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/appointment-part.html' %}
+    <!-- End Appointment Area -->
+    <!-- Start Fun Fact Area -->
+    {% include 'www/components/fun-facts-part.html' %}
+    <!-- End Fun Fact Area -->
+    <!-- Start Feedback Area -->
+    {% include 'www/components/feedback-part.html' %}
+    <!-- End Feedback Area -->
+
+    <br>
+{% endblock %}

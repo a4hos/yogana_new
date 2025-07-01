@@ -1,0 +1,47 @@
+<!-- Start Feedback Area -->
+<section class="feedback-area ptb-100 pt-0">
+    <div class="container">
+        <div class="section-title">
+            <span>Feedback</span>
+            <h2>Our Happy Clients Says About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+
+        <div class="feedback-slides">
+            <div class="client-thumbnails">
+                <div>
+                    {% for feedback in feedback_data %}
+                    <div class="item">
+                        <div class="img-fill"><img src="{{ feedback.image }}" alt="{{ feedback.name }}"></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="client-feedback">
+                <div>
+                    {% for feedback in feedback_data %}
+                    <div class="item">
+                        <div class="single-feedback">
+                            <h3>{{ feedback.name }}</h3>
+                            <span>{{ feedback.role }}</span>
+                            <p>{{ feedback.feedback }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button class="prev-arrow slick-arrow">
+                    <i class='flaticon-left-arrow'></i>
+                </button>
+
+                <button class="next-arrow slick-arrow">
+                    <i class='flaticon-arrow-pointing-to-right'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="shape3"><img src="static/img/shape/3.png" class="wow fadeInLeft" alt="image"></div>
+</section>
+<!-- End Feedback Area -->

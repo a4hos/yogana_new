@@ -1,0 +1,156 @@
+<!-- Blog Details.html -->
+{% extends 'www/base.html' %}
+
+
+{% block content_wrapper %}
+    <title>{{ blog_post['title'] }}</title>
+
+    <!-- Start Appointment Area -->
+    {% include 'www/components/breadcrumbs.html' %}
+    <!-- End Appointment Area -->
+
+    
+    <!-- Start Blog Details Area -->
+    <section class="blog-details-area ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="blog-details-desc">
+                        <div class="article-image">
+                            <img src="{{ url_for('static', filename=blog_post['image']) }}" alt="image">
+                        </div>
+    
+                        <div class="article-content">
+                            <div class="entry-meta">
+                                <ul>
+                                    <li><span>Published on:</span> <a href="#">{{ blog_post['published_on'] }}</a></li>
+                                    <li><span>Published by:</span> <a href="#">{{ blog_post['published_by'] }}</a></li>
+                                    <li><span>Author:</span> <a href="#">{{ blog_post['author'] }}</a></li>
+
+                                </ul>
+                            </div>
+    
+                            <h3>{{ blog_post['title'] }}</h3>
+    
+                            <p>{{ blog_post['excerpt'] }}</p>
+    
+                            <p></p>
+                            {% if ';;' in blog_post['content'] %}
+                                {% set content = blog_post['content'].split(';;') %}
+                                {% for part in content %}
+                                    <p>{{ part.strip() }}</p> 
+                                {% endfor %}
+                            {% else %}
+                                <p> {{ blog_post['content'] }}</p>
+                            {% endif %}
+
+
+
+    
+                            <ul class="wp-block-gallery columns-3">
+                                <li class="blocks-gallery-item">
+                                    <figure>
+                                        <img src="{{ url_for('static', filename=blog_post['gallery_images']) }}" alt="image">
+                                    </figure>
+                                </li>
+                            </ul>
+    
+                            <h3>Four Key Elements We Offer:</h3>
+    
+                            <ul class="features-list">
+
+                                    {% if ';;' in blog_post['features'] %}
+                                        {% set feature_parts = blog_post['features'].split(';;') %}
+                                        {% for part in feature_parts %}
+                                            <li><i class="flaticon-check-mark"></i> {{ part.strip() }}</li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li><i class="flaticon-check-mark"></i> {{ blog_post['features'] }}</li>
+                                    {% endif %}
+
+                            </ul>
+                            
+                        </div>
+    
+                        <div class="article-footer">
+
+                            <div class="article-tags">
+                                <span><i class="fas fa-bookmark"></i></span>
+                                {% if ',' in blog_post['tags'] %}
+                                    {% set tag_parts = blog_post['tags'].split(',') %}
+                                    {% for part in tag_parts %}
+                                        <a href="#">{{ part.strip() }}</a>{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <a href="#">{{ blog_post['tags'] }}</a>
+                                {% endif %}
+                            </div>
+
+                            <div class="article-share">
+                                <ul class="social">
+                                    <li><span>Share:</span></li>
+                                    <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <div class="post-navigation">
+                            <div class="navigation-links">
+                                <div class="nav-previous">
+                                    <a href="#"><i class="flaticon-left-arrow"></i> Previous Post</a>
+                                </div>
+    
+                                <div class="nav-next">
+                                    <a href="#">Next Post <i class="flaticon-arrow-pointing-to-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <aside class="widget-area" id="secondary">
+                        <section class="widget widget_search">
+                            <form class="search-form" method="GET" action="{{ url_for('search') }}">
+                                <label>
+                                    <span class="screen-reader-text">البحث عن:</span>
+                                    <input type="search" class="search-field" placeholder="type here" name="q" value="{{ request.args.get('q', '') }}">
+                                </label>
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </section>
+                        
+
+
+                        <section class="widget widget_fovia_posts_thumb">
+                            <h3 class="widget-title">Latest Posts</h3>
+                        
+                            {% for blog in latest_blogs %}
+                            <article class="item">
+                                <a href="{{ url_for('blog_details', slug=blog['slug']) }}" class="thumb">
+                                    <span class="fullimage cover" style="background-image: url('{{ blog['image'] }}');" role="img"></span>
+                                </a>
+                                <div class="info">
+                                    <time datetime="{{ blog['published_on'] }}">{{ blog['published_on'] }}</time>
+                                    <h4 class="title usmall"><a href="{{ url_for('blog_details', slug=blog['slug']) }}">{{ blog['title'] }}</a></h4>
+                                </div>
+                                <div class="clear"></div>
+                            </article>
+                            {% endfor %}
+                        </section>
+                        
+
+
+                    </aside>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- End Blog Details Area -->
+    
+{% endblock %}

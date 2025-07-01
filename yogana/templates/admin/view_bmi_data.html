@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content_wrapper %}
+    <div class="container mt-5">
+        <h2>BMI Calculator Records</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>BMI</th>
+                    <th>BMI Category</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in bmi_data.items %}
+                <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.weight }}</td>
+                    <td>{{ data.height }}</td>
+                    <td>{{ data.bmi }}</td>
+                    <td>{{ data.bmi_category }}</td>
+                    <td>{{ data.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if bmi_data.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('view_bmi_data', page=bmi_data.prev_num) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for page_num in bmi_data.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                    {% if page_num %}
+                        {% if page_num == bmi_data.page %}
+                            <li class="page-item active"><span class="page-link">{{ page_num }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="{{ url_for('view_bmi_data', page=page_num) }}">{{ page_num }}</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">…</span></li>
+                    {% endif %}
+                {% endfor %}
+                {% if bmi_data.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('view_bmi_data', page=bmi_data.next_num) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

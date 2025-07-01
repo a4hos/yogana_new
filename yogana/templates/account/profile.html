@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content_wrapper %}
+
+
+<div class="col-12 grid-margin">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Profile </h4>
+      <form method="POST" class="form-register text-center" style="color: rgb(36, 36, 36);">
+        {{ form.hidden_tag() }}
+        <h1 class="h3 mb-3 font-weight-normal">Your Account</h1>
+    
+        <!-- Custom styling for the form border -->
+        <div class="form-border">
+          <div class="form-group1 row">
+            <label for="{{ form.name.id }}" class="col-sm-3 col-form-label">{{ form.name.label() }}</label>
+            <div class="col-sm-9">
+              {{ form.name(class="form-control", placeholder="Name", required=True) }}
+            </div>
+          </div>
+          <div class="form-group1 row">
+            <label for="{{ form.cnumb.id }}" class="col-sm-3 col-form-label">{{ form.cnumb.label() }}</label>
+            <div class="col-sm-9">
+              {{ form.cnumb(class="form-control", placeholder="Number", required=True)}}
+            </div>
+          </div>
+          <div class="form-group1 row">
+            <label for="{{ form.username.id }}" class="col-sm-3 col-form-label">{{ form.username.label() }}</label>
+            <div class="col-sm-9">
+              {{ form.username(class="form-control", placeholder="User Name", readonly=True) }}
+            </div>
+          </div>
+    
+          <div class="form-group1 row">
+            <label for="{{ form.email_address.id }}" class="col-sm-3 col-form-label">{{ form.email_address.label() }}</label>
+            <div class="col-sm-9">
+              {{ form.email_address(class="form-control", placeholder="Email Address", readonly=True) }}
+            </div>
+          </div>
+    
+    
+          <div class="form-group1 row">
+            <label for="{{ form.company_name.id }}" class="col-sm-3 col-form-label">{{ form.company_name.label() }}</label>
+            <div class="col-sm-9">
+              {{ form.company_name(class="form-control", placeholder="Company Name", readonly=True) }}
+            </div>
+          </div>
+    
+          <button class="btn btn-lg btn-primary" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+{% endblock %}

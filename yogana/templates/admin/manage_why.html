@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Add New FAQ
+{% endblock %}
+
+{% block content_wrapper %}
+<h1>Manage why Section</h1>
+
+
+<!-- List All why Sections -->
+<h2>Existing why Sections</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Icon</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Button Text</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for why in why_sections %}
+        <tr>
+            <td>{{ why.id }}</td>
+            <td>{{ why.icon }}</td>
+            <td>{{ why.title }}</td>
+            <td>{{ why.description }}</td>
+            <td>{{ why.button_text }}</td>
+            <td>
+                <a href="{{ url_for('edit_why', id=why.id) }}" class="btn btn-warning btn-sm">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block content_wrapper %}
+  <h1>Add Blog</h1>
+  
+  
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+      {{ form.title.label }}<br>
+      {{ form.title(size=40) }}
+    </div>
+    <div>
+      {{ form.slug.label }}<br>
+      {{ form.slug(size=40) }}
+    </div>
+    <div>
+      {{ form.content.label }}<br>
+      <textarea id="editor" name="content">{{ form.content.data }}</textarea>
+    </div>
+
+    <button type="submit">Add Blog</button>
+  </form>
+
+  <!-- Add CKEditor 4.25.0-lts from CDN 
+  <script src="https://cdn.ckeditor.com/4.25.0-lts/standard/ckeditor.js"></script>-->
+
+
+
+  <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+
+  <!-- Initialize CKEditor -->
+<script src="https://cdn.ckeditor.com/4.25.0/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('content', {
+    extraPlugins: 'link,image', // Include image uploading if necessary
+    allowedContent: true,
+    removeButtons: 'PasteFromWord' // Optional: Remove unwanted buttons
+  });
+</script>
+{% endblock %}
